@@ -168,7 +168,6 @@
 				var name = response[i].mission_name;
 				var status = response[i].launch_success;
 				
-				alert(launch_year);
 				if (fired_button == response[i].launch_year) {
 
 					document.getElementById("mission_name").innerHTML = name;
@@ -230,7 +229,7 @@
 			for (i = 0; i <= (statusL.length); i++) {
 
 				statusL=response[i].launch_success;
-				alert(statusL);
+			
 				if (statusL == true) {
 					
 					document.getElementById("land_success1").innerHTML = statusL;
@@ -252,9 +251,6 @@
 		type: "GET",
 		url: 'https://api.spacexdata.com/v3/launches?limit=100&launch_success=true&land_success=true&launch_year=2014',
 		success: function (response) {
-
-			console.log(response);
-
 			for (i = 0; i <= (response.length); i++) {
 				var year = response[i].launch_year;
 				var num = response[i].flight_number;
