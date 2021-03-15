@@ -137,19 +137,26 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
      <script>
 
-$("button").click(function () {
-	var data;
+
+var data;
 	var i = 0;
 	var j = 0;
+
+$("button").click(function () {
+	
 	var fired_button = $(this).val();
 	alert(fired_button);
+
 	$.ajax({
 		data: data,
 		dataType: 'json',
 		type: "GET",
 		url: 'https://api.spaceXdata.com/v3/launches?limit=100',
 		success: function (response) {
-			var MI = response[i].mission_id;
+		
+			
+			for(i=0;i<=response.length;i++){
+				var MI = response[i].mission_id;
 			var FN = response[i].flight_number;
 			console.log(FN);
 			var LY = response[i].launch_year;
@@ -160,20 +167,22 @@ $("button").click(function () {
 			console.log(LaunchS);
 			var LandS = response[i].land_success;
 			console.log(LandS);
+			
+				if (LY == fired_button) {
 
+					document.getElementById("mission_name1").innerHTML = MN;
+					document.getElementById("mission_id1").innerHTML = MI;
+					document.getElementById("launch_year1").innerHTML = LY;
+					document.getElementById("launch_success1").innerHTML = LaunchS;
+					document.getElementById("land_success1").innerHTML = LandS;
 
-			document.getElementById("mission_name1").innerHTML = MN;
-			document.getElementById("mission_id1").innerHTML = MI;
-			document.getElementById("launch_year1").innerHTML = LY;
-			document.getElementById("launch_success1").innerHTML = LaunchS;
-			document.getElementById("land_success1").innerHTML = LandS;
+				}
 
-
+			}
 		}
 
 
 	});
-
 
 	$.ajax({
 		data: data,
@@ -181,34 +190,18 @@ $("button").click(function () {
 		type: "GET",
 		url: 'https://api.spaceXdata.com/v3/launches?limit=100&launch_success=true',
 		success: function (response) {
-		var MI = response[i].mission_id;
-			var FN = response[i].flight_number;
-			console.log(FN);
-			var LY = response[i].launch_year;
-			console.log(LY);
-			var MN = response[i].mission_name
-			console.log(MN);
-			
-			var LandS = response[i].land_success;
-			console.log(LandS);
+	
 
 			var LaunchS = response[i].launch_success;
 			if (LaunchS == true) {
 
-				document.getElementById("mission_name1").innerHTML = MN;
-				document.getElementById("mission_id1").innerHTML = MI;
-				document.getElementById("launch_year1").innerHTML = LY;
+				
 				document.getElementById("launch_success1").innerHTML = LaunchS;
-				document.getElementById("land_success1").innerHTML = LandS;
-
-
+				
 			} else {
 
-				document.getElementById("mission_name1").innerHTML = MN;
-				document.getElementById("mission_id1").innerHTML = MI;
-				document.getElementById("launch_year1").innerHTML = LY;
 				document.getElementById("launch_success1").innerHTML = LaunchS;
-				document.getElementById("land_success1").innerHTML = LandS;
+				
 
 			}
 
@@ -224,33 +217,19 @@ $("button").click(function () {
 		type: "GET",
 		url: 'https://api.spaceXdata.com/v3/launches?limit=100&launch_success=true&land_success=true',
 		success: function (response) {
-		var MI = response[i].mission_id;
-			var FN = response[i].flight_number;
-			console.log(FN);
-			var LY = response[i].launch_year;
-			console.log(LY);
-			var MN = response[i].mission_name
-			console.log(MN);
-			var LaunchS = response[i].launch_success;
-			console.log(LaunchS);
+	
 		
 
 			var LandS = response[i].land_success;
 			if (LandS == true) {
 
-				document.getElementById("mission_name1").innerHTML = MN;
-				document.getElementById("mission_id1").innerHTML = MI;
-				document.getElementById("launch_year1").innerHTML = LY;
-				document.getElementById("launch_success1").innerHTML = LaunchS;
+				
 				document.getElementById("land_success1").innerHTML = LandS;
 
 
 			} else {
 
-				document.getElementById("mission_name1").innerHTML = MN;
-				document.getElementById("mission_id1").innerHTML = MI;
-				document.getElementById("launch_year1").innerHTML = LY;
-				document.getElementById("launch_success1").innerHTML = LaunchS;
+				
 				document.getElementById("land_success1").innerHTML = LandS;
 
 			}
